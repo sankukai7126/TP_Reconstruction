@@ -13,8 +13,8 @@ import glob
 
 def CameraCalibration():
     # Calcul de critere
-    # cv.TERM_CRITERIA_EPS -->  Stop the algorithm iteration if specified accuracy, epsilon, is reached.
-    # cv.TERM_CRITERIA_MAX_ITER --> Stop the algorithm after the specified number of iterations, max_iter.
+    # cv.TERM_CRITERIA_EPS -->  On arrete l'algorithme lorsque la precision voulu est atteinte
+    # cv.TERM_CRITERIA_MAX_ITER --> On arrete l'algorithme lorsque l'on atteint le maximum d'iteration specifie
     criteria = (cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER, 30, 0.001)
     
     
@@ -69,8 +69,6 @@ def CameraCalibration():
     print('newcameramtx\n',newcameramtx)
 
     # On enlève la distortion pour ravoire l'image de début
-    # Quels phénomènes peut engendrer la déformation de la figure 2d ?
-    #
     mapx, mapy = cv.initUndistortRectifyMap(mtx, dist, None, newcameramtx, (w, h), 5)
     dst = cv.remap(img, mapx, mapy, cv.INTER_LINEAR)
     # On recadre l'image
