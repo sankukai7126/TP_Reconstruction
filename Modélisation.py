@@ -194,7 +194,10 @@ def StereoCalibrate(Cameramtx):
     print('F\n', F)
 
     # Calcul de la matrice fondamentale à partir de la matrice essentielle
-    FT = np.cross(F*t,E)
+    #FT = K1 * E * K2
+    #K1 matrice inverse de la transposee de la matrice K
+    #K2 matrice inverse de K
+    FT = np.matmul(np.matmul(np.linalg.inv(np.transpose(cameraMatrix)),E),np.linalg.inv(cameraMatrix))
 
     return pts1, pts2, F, maskF, FT, maskE
 
